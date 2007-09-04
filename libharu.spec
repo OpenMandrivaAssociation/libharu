@@ -5,7 +5,7 @@
 Summary:	HARU is a free, cross platform, open-sourced software library for generating PDF
 Name:		libharu
 Version:	2.0.8
-Release:	%mkrel 2
+Release:	%mkrel 3
 Group:		System/Libraries
 License:	BSD-like
 URL:		http://libharu.sourceforge.net/
@@ -32,7 +32,7 @@ PDF.
 Summary:        Development headers for libharu 
 Group:          Development/C
 Requires:       %{libname} = %{version}
-Provides:	lib%{name}-devel = %{version}
+Provides:	%{name}-devel = %{version}
 
 %description -n	%{develname}
 HARU is a free, cross platform, open-sourced software library for generating
