@@ -2,7 +2,7 @@
 %define	libname %mklibname haru %{major}
 %define develname %mklibname haru -d
 
-Summary:	HARU is a free, cross platform, open-sourced software library for generating PDF
+Summary:	Free, cross platform, open-sourced software library for generating PDF
 Name:		libharu
 Version:	2.0.8
 Release:	%mkrel 3
