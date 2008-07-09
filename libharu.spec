@@ -5,7 +5,7 @@
 Summary:	Cross platform software library for generating PDF
 Name:		libharu
 Version:	2.0.8
-Release:	%mkrel 4
+Release:	%mkrel 5
 Group:		System/Libraries
 License:	BSD-like
 URL:		http://libharu.sourceforge.net/
