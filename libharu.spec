@@ -1,20 +1,18 @@
-%define	major 1
-%define	libname %mklibname haru %{major}
+%define	libname %mklibname haru %{version}
 %define develname %mklibname haru -d
 
 Summary:	Cross platform software library for generating PDF
 Name:		libharu
-Version:	2.0.8
-Release:	%mkrel 7
+Version:	2.3.0
+Release:	1
 Group:		System/Libraries
 License:	BSD-like
 URL:		http://libharu.sourceforge.net/
-Source0:	http://surfnet.dl.sourceforge.net/sourceforge/libharu/libharu_2_0_8.tgz
-Patch0:		libharu-destdir.patch
+Source0:	https://github.com/libharu/libharu/archive/RELEASE_2_3_0.zip
+#Patch0:		libharu-destdir.patch
 BuildRequires:	libpng-devel
 BuildRequires:	zlib-devel
 BuildRequires:	file
-BuildRoot:	%{_tmppath}/%{name}-%{version}-build
 
 %description
 HARU is a free, cross platform, open-sourced software library for generating
@@ -42,8 +40,8 @@ This package contains the static library and header files.
 
 %prep
 
-%setup -q
-%patch0
+%setup -qn libharu-RELEASE_2_3_0
+%apply_patches
 
 # fix permissions
 find doc -type f | xargs chmod 644
@@ -55,31 +53,18 @@ find . -type f|xargs file|grep 'text'|cut -d: -f1|xargs perl -p -i -e 's/\r//'
 %build
 %serverbuild
 
-./configure --shared --prefix=%{_usr}
-
+autoreconf -fiv
+%configure --enable-debug
 %make
 
 %install
 
-%makeinstall_std LIBDIR=%{_lib}
-
-%if %mdkversion < 200900
-%post -n %{libname} -p /sbin/ldconfig
-%endif
-
-%if %mdkversion < 200900
-%postun	-n %{libname} -p /sbin/ldconfig
-%endif
-
-%clean
-rm -rf %{buildroot}
+%makeinstall_std
 
 %files -n %{libname}
-%defattr(-,root,root)
-%doc doc/* CHANGES README TODO
-%{_libdir}/*.so.*
+%doc CHANGES README
+%{_libdir}/libhpdf-%{version}.so
 
 %files -n %{develname}
-%defattr(-,root,root)
 %{_includedir}/hpdf*.h
-%{_libdir}/*.so
+%{_libdir}/libhpdf.so
