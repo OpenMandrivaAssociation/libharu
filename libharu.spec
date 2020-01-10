@@ -41,7 +41,7 @@ This package contains the static library and header files.
 %prep
 
 %setup -qn libharu-RELEASE_2_3_0
-%apply_patches
+%autopatch -p1
 
 # fix permissions
 find doc -type f | xargs chmod 644
