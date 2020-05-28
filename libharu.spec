@@ -35,6 +35,7 @@ Summary:	Development headers for libharu
 Group:		Development/C
 Requires:	%{libname} >= %{EVRD}
 Provides:	%{name}-devel = %{EVRD}
+Provides:	libhpdf-devel = %{EVRD}
 
 %description -n %{develname}
 HARU is a free, cross platform, open-sourced software library for generating
