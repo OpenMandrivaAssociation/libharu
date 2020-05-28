@@ -1,3 +1,4 @@
+%define _disable lto 1
 %define libname %mklibname haru %{version}
 %define develname %mklibname haru -d
 
