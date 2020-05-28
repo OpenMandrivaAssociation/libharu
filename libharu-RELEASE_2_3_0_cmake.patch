@@ -1,7 +1,7 @@
-diff -urp libharu-RELEASE_2_3_0/CMakeLists.txt libharu-RELEASE_2_3_0_cmake/CMakeLists.txt
---- libharu-RELEASE_2_3_0/CMakeLists.txt	2013-10-30 20:11:59.000000000 +0700
-+++ libharu-RELEASE_2_3_0_cmake/CMakeLists.txt	2017-06-01 15:56:06.533552795 +0700
-@@ -25,7 +25,7 @@ endif(MSVC)
+diff -Naur libharu-RELEASE_2_3_0/CMakeLists.txt libharu-RELEASE_2_3_0.tpg/CMakeLists.txt
+--- libharu-RELEASE_2_3_0/CMakeLists.txt	2013-10-30 13:11:59.000000000 +0000
++++ libharu-RELEASE_2_3_0.tpg/CMakeLists.txt	2020-05-28 15:02:34.492298792 +0000
+@@ -25,7 +25,7 @@
  
  # information about libharu
  set(LIBHPDF_MAJOR 2)
@@ -10,7 +10,7 @@ diff -urp libharu-RELEASE_2_3_0/CMakeLists.txt libharu-RELEASE_2_3_0_cmake/CMake
  set(LIBHPDF_PATCH 0)
  set(LIBHPDF_VERSION ${LIBHPDF_MAJOR}.${LIBHPDF_MINOR}.${LIBHPDF_PATCH})
  set(LIBHPDF_DESCRIPTION "libHaru is a free, cross platform, open source library for generating PDF files.")
-@@ -210,9 +210,9 @@ set(
+@@ -210,9 +210,9 @@
  install(FILES ${haru_HDRS} DESTINATION include)
  
  # install various files
@@ -22,11 +22,24 @@ diff -urp libharu-RELEASE_2_3_0/CMakeLists.txt libharu-RELEASE_2_3_0_cmake/CMake
  endif(NOT DEVPAK)
  if(DEVPAK)
    install(FILES ${CMAKE_BINARY_DIR}/libharu.DevPackage DESTINATION .)
-diff -urp libharu-RELEASE_2_3_0/src/CMakeLists.txt libharu-RELEASE_2_3_0_cmake/src/CMakeLists.txt
---- libharu-RELEASE_2_3_0/src/CMakeLists.txt	2013-10-30 20:11:59.000000000 +0700
-+++ libharu-RELEASE_2_3_0_cmake/src/CMakeLists.txt	2017-06-01 16:08:45.425105746 +0700
-@@ -90,11 +90,13 @@ if(LIBHPDF_SHARED)
-   target_link_libraries(${LIBHPDF_NAME} ${ADDITIONAL_LIBRARIES})
+diff -Naur libharu-RELEASE_2_3_0/src/CMakeLists.txt libharu-RELEASE_2_3_0.tpg/src/CMakeLists.txt
+--- libharu-RELEASE_2_3_0/src/CMakeLists.txt	2013-10-30 13:11:59.000000000 +0000
++++ libharu-RELEASE_2_3_0.tpg/src/CMakeLists.txt	2020-05-28 15:03:03.334301133 +0000
+@@ -72,7 +72,7 @@
+ # =======================================================================
+ if(LIBHPDF_STATIC)
+   add_library(${LIBHPDF_NAME_STATIC} STATIC ${LIBHPDF_SRCS})
+-  target_link_libraries(${LIBHPDF_NAME_STATIC} ${ADDITIONAL_LIBRARIES})
++  target_link_libraries(${LIBHPDF_NAME_STATIC} -lm ${ADDITIONAL_LIBRARIES})
+   install(
+     TARGETS ${LIBHPDF_NAME_STATIC}
+     ARCHIVE DESTINATION lib
+@@ -87,14 +87,16 @@
+ endif(LIBHPDF_STATIC)
+ if(LIBHPDF_SHARED)
+   add_library(${LIBHPDF_NAME} SHARED ${LIBHPDF_SRCS})
+-  target_link_libraries(${LIBHPDF_NAME} ${ADDITIONAL_LIBRARIES})
++  target_link_libraries(${LIBHPDF_NAME} -lm ${ADDITIONAL_LIBRARIES})
    if(WIN32 AND NOT CYGWIN)
    	set_target_properties(${LIBHPDF_NAME} PROPERTIES DEFINE_SYMBOL HPDF_DLL_MAKE)
 +  else(WIN32 AND NOT CYGWIN)
