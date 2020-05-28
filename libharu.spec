@@ -67,3 +67,4 @@ find . -type f|xargs file|grep 'text'|cut -d: -f1|xargs perl -p -i -e 's/\r//'
 %doc CHANGES README
 %{_includedir}/hpdf*.h
 %{_libdir}/libhpdf.so
+%{_datadir}/%{name}
