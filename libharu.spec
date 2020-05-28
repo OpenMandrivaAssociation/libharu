@@ -1,5 +1,6 @@
-%define libname %mklibname haru %{version}
-%define develname %mklibname haru -d
+%define major 2
+%define libname %mklibname hpdf %{major}
+%define develname %mklibname hpdf -d
 
 Summary:	Cross platform software library for generating PDF
 Name:		libharu
@@ -60,7 +61,7 @@ find . -type f|xargs file|grep 'text'|cut -d: -f1|xargs perl -p -i -e 's/\r//'
 %make_install -C build
 
 %files -n %{libname}
-%{_libdir}/libhpdf-%{version}.so
+%{_libdir}/libhpdf.so.%{major}*
 
 %files -n %{develname}
 %doc CHANGES README
