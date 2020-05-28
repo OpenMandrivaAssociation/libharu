@@ -53,12 +53,12 @@ find . -type f|xargs file|grep 'CRLF'|cut -d: -f1|xargs perl -p -i -e 's/\r//'
 find . -type f|xargs file|grep 'text'|cut -d: -f1|xargs perl -p -i -e 's/\r//'
 
 %build
-%cmake -DLIBHPDF_STATIC=NO
+%cmake -DLIBHPDF_STATIC=NO -DSHARE_INSTALL_PREFIX=%{_datadir}
 
 %make_build
 
 %install
-make install/fast -C build  DESTDIR=%{buildroot}
+%make_install -C build
 
 %files -n %{libname}
 %{_libdir}/libhpdf.so.%{major}*
