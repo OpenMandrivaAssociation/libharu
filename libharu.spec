@@ -58,7 +58,7 @@ find . -type f|xargs file|grep 'text'|cut -d: -f1|xargs perl -p -i -e 's/\r//'
 %make_build
 
 %install
-%make_install -C build
+make install/fast -C build  DESTDIR=%{buildroot}
 
 %files -n %{libname}
 %{_libdir}/libhpdf.so.%{major}*
