@@ -49,6 +49,8 @@ find doc -type f | xargs chmod 644
 find . -type f|xargs file|grep 'CRLF'|cut -d: -f1|xargs perl -p -i -e 's/\r//'
 find . -type f|xargs file|grep 'text'|cut -d: -f1|xargs perl -p -i -e 's/\r//'
 
+sed -i -e 's#/usr/bin/##g' configure*
+
 %build
 autoreconf -fi
 %configure --enable-debug
