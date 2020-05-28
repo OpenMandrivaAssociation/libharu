@@ -9,11 +9,13 @@ Group:		System/Libraries
 License:	BSD-like
 URL:		http://libharu.sourceforge.net
 Source0:	https://github.com/libharu/libharu/archive/%{name}-RELEASE_2_3_0.tar.gz
-#Patch0:		libharu-destdir.patch
-Patch1:		libharu-2.3.0-shadings.patch
+Patch0:         libharu-RELEASE_2_3_0_cmake.patch
+Patch1:         libharu-2.3.0-triangleshading.patch
+Patch2:         libharu-2.3.0-smallnumber.patch
 BuildRequires:	pkgconfig(libpng)
 BuildRequires:	pkgconfig(zlib)
 BuildRequires:	file
+BuildREquires:  cmake
 
 %description
 HARU is a free, cross platform, open-sourced software library for generating
@@ -49,16 +51,14 @@ find doc -type f | xargs chmod 644
 find . -type f|xargs file|grep 'CRLF'|cut -d: -f1|xargs perl -p -i -e 's/\r//'
 find . -type f|xargs file|grep 'text'|cut -d: -f1|xargs perl -p -i -e 's/\r//'
 
-sed -i -e 's#/usr/bin/##g' configure*
-
 %build
 autoreconf -fi
-%configure --enable-debug
+%cmake -DLIBHPDF_STATIC=NO
 
 %make_build
 
 %install
-%make_install
+%make_install -C build
 
 %files -n %{libname}
 %{_libdir}/libhpdf-%{version}.so
