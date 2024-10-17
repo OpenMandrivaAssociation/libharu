@@ -9,7 +9,7 @@ Version:	2.4.4
 Release:	1
 Group:		System/Libraries
 License:	BSD-like
-URL:		http://libharu.sourceforge.net
+URL:		https://libharu.sourceforge.net
 Source0:	https://github.com/libharu/libharu/archive/refs/tags/v%{version}.tar.gz
 BuildRequires:	pkgconfig(libpng)
 BuildRequires:	pkgconfig(zlib)
